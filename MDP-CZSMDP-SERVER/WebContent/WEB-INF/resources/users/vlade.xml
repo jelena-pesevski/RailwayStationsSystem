@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_281" class="java.beans.XMLDecoder">
+ <object class="org.unibl.etf.mdp.model.User">
+  <void property="password">
+   <string>AUR4IR0eKxONlCiWhABNvw==</string>
+  </void>
+  <void property="station">
+   <string>2</string>
+  </void>
+  <void property="username">
+   <string>vlade</string>
+  </void>
+ </object>
+</java>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="285.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unibl.etf.mdp.controllers.TrainPassDialog">
+   <children>
+      <Button layoutX="94.0" layoutY="175.0" mnemonicParsing="false" onAction="#notify" prefHeight="25.0" prefWidth="91.0" text="Notify" />
+      <Label layoutX="42.0" layoutY="60.0" text="Timetable id:" />
+      <Label layoutX="55.0" layoutY="116.0" text="Time:" />
+      <TextField fx:id="timetableId" layoutX="139.0" layoutY="56.0" prefHeight="25.0" prefWidth="109.0" />
+      <TextField fx:id="time" layoutX="139.0" layoutY="112.0" prefHeight="25.0" prefWidth="109.0" promptText="hh:mm" />
+   </children>
+</AnchorPane>

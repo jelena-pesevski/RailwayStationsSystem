@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CZSMDPServiceService WSDL service -->
+
+  <service name="CZSMDPService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap.mdp.etf.unibl.org"/>
+      <parameter name="wsdlServiceElement" value="CZSMDPServiceService"/>
+      <parameter name="schemaQualified" value="http://model.mdp.etf.unibl.org,http://soap.mdp.etf.unibl.org"/>
+      <parameter name="wsdlServicePort" value="CZSMDPService"/>
+      <parameter name="className" value="org.unibl.etf.mdp.soap.CZSMDPService"/>
+      <parameter name="wsdlPortType" value="CZSMDPService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://soap.mdp.etf.unibl.org" xmlns:retNS="http://soap.mdp.etf.unibl.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addUser" qname="operNS:addUser" returnQName="retNS:addUserReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://soap.mdp.etf.unibl.org" xmlns:tns="http://model.mdp.etf.unibl.org" qname="pns:user" type="tns:User"/>
+      </operation>
+      <operation xmlns:operNS="http://soap.mdp.etf.unibl.org" xmlns:retNS="http://soap.mdp.etf.unibl.org" xmlns:rtns="http://model.mdp.etf.unibl.org" name="listUsers" qname="operNS:listUsers" returnQName="retNS:listUsersReturn" returnType="rtns:User" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://soap.mdp.etf.unibl.org" xmlns:retNS="http://soap.mdp.etf.unibl.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteUser" qname="operNS:deleteUser" returnQName="retNS:deleteUserReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://soap.mdp.etf.unibl.org" xmlns:tns="http://model.mdp.etf.unibl.org" qname="pns:user" type="tns:User"/>
+      </operation>
+      <parameter name="allowedMethods" value="addUser listUsers deleteUser"/>
+
+      <typeMapping xmlns:ns="http://model.mdp.etf.unibl.org" qname="ns:User" type="java:org.unibl.etf.mdp.model.User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

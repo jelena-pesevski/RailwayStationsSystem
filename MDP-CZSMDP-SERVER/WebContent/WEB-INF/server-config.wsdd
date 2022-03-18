@@ -1,0 +1,92 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\Jelena\eclipse-workspaceEE\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MDP-CZSMDP-SOAP\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="CZSMDPService" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="deleteUser" qname="ns1:deleteUser" returnQName="ns1:deleteUserReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://service.mdp.etf.unibl.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:user" type="ns2:User" xmlns:ns2="http://model.mdp.etf.unibl.org" xmlns:ns3="http://xml.apache.org/axis/wsdd/"/>
+  </ns2:operation>
+  <ns1:operation name="listUsers" qname="ns3:listUsers" returnQName="ns3:listUsersReturn" returnType="ns4:User" soapAction="" xmlns:ns3="http://service.mdp.etf.unibl.org" xmlns:ns4="http://model.mdp.etf.unibl.org"/>
+  <ns1:operation name="addUser" qname="ns5:addUser" returnQName="ns5:addUserReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://service.mdp.etf.unibl.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:user" type="ns6:User" xmlns:ns6="http://model.mdp.etf.unibl.org"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="listUsers addUser deleteUser"/>
+  <ns1:parameter name="wsdlPortType" value="CZSMDPService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://service.mdp.etf.unibl.org,http://model.mdp.etf.unibl.org"/>
+  <ns1:parameter name="wsdlServicePort" value="CZSMDPService"/>
+  <ns1:parameter name="className" value="org.unibl.etf.mdp.service.CZSMDPService"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://service.mdp.etf.unibl.org"/>
+  <ns1:parameter name="wsdlServiceElement" value="CZSMDPServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns7:User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:org.unibl.etf.mdp.model.User" xmlns:ns7="http://model.mdp.etf.unibl.org"/>
+ </ns1:service>
+ <ns1:service name="ZSMDPService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="logout" qname="ns8:logout" returnQName="ns8:logoutReturn" returnType="xsd:boolean" soapAction="" xmlns:ns8="http://service.mdp.etf.unibl.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns8:user" type="ns9:User" xmlns:ns9="http://model.mdp.etf.unibl.org"/>
+  </ns1:operation>
+  <ns1:operation name="login" qname="ns10:login" returnQName="ns10:loginReturn" returnType="xsd:boolean" soapAction="" xmlns:ns10="http://service.mdp.etf.unibl.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns10:user" type="ns11:User" xmlns:ns11="http://model.mdp.etf.unibl.org"/>
+  </ns1:operation>
+  <ns1:operation name="getActiveUsers" qname="ns12:getActiveUsers" returnQName="ns12:getActiveUsersReturn" returnType="ns13:User" soapAction="" xmlns:ns12="http://service.mdp.etf.unibl.org" xmlns:ns13="http://model.mdp.etf.unibl.org"/>
+  <ns1:operation name="getUsersForStation" qname="ns14:getUsersForStation" returnQName="ns14:getUsersForStationReturn" returnType="ns15:User" soapAction="" xmlns:ns14="http://service.mdp.etf.unibl.org" xmlns:ns15="http://model.mdp.etf.unibl.org">
+   <ns1:parameter qname="ns14:stationId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns14:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="logout getActiveUsers login getUsersForStation"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="ZSMDPService"/>
+  <ns1:parameter name="className" value="org.unibl.etf.mdp.service.ZSMDPService"/>
+  <ns1:parameter name="wsdlServicePort" value="ZSMDPService"/>
+  <ns1:parameter name="schemaQualified" value="http://service.mdp.etf.unibl.org,http://model.mdp.etf.unibl.org"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://service.mdp.etf.unibl.org"/>
+  <ns1:parameter name="wsdlServiceElement" value="ZSMDPServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:org.unibl.etf.mdp.model.User" xmlns:ns16="http://model.mdp.etf.unibl.org"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

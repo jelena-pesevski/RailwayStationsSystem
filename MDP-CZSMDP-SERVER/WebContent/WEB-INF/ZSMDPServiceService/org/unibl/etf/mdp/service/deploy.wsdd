@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ZSMDPServiceService WSDL service -->
+
+  <service name="ZSMDPService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.mdp.etf.unibl.org"/>
+      <parameter name="wsdlServiceElement" value="ZSMDPServiceService"/>
+      <parameter name="schemaQualified" value="http://service.mdp.etf.unibl.org,http://model.mdp.etf.unibl.org"/>
+      <parameter name="wsdlServicePort" value="ZSMDPService"/>
+      <parameter name="className" value="org.unibl.etf.mdp.service.ZSMDPService"/>
+      <parameter name="wsdlPortType" value="ZSMDPService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.mdp.etf.unibl.org" xmlns:retNS="http://service.mdp.etf.unibl.org" xmlns:rtns="http://model.mdp.etf.unibl.org" name="login" qname="operNS:login" returnQName="retNS:loginReturn" returnType="rtns:User" soapAction="">
+        <parameter xmlns:pns="http://service.mdp.etf.unibl.org" xmlns:tns="http://model.mdp.etf.unibl.org" qname="pns:user" type="tns:User"/>
+      </operation>
+      <operation xmlns:operNS="http://service.mdp.etf.unibl.org" xmlns:retNS="http://service.mdp.etf.unibl.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="logout" qname="operNS:logout" returnQName="retNS:logoutReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.mdp.etf.unibl.org" xmlns:tns="http://model.mdp.etf.unibl.org" qname="pns:user" type="tns:User"/>
+      </operation>
+      <operation xmlns:operNS="http://service.mdp.etf.unibl.org" xmlns:retNS="http://service.mdp.etf.unibl.org" xmlns:rtns="http://model.mdp.etf.unibl.org" name="getActiveUsers" qname="operNS:getActiveUsers" returnQName="retNS:getActiveUsersReturn" returnType="rtns:User" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.mdp.etf.unibl.org" xmlns:retNS="http://service.mdp.etf.unibl.org" xmlns:rtns="http://model.mdp.etf.unibl.org" name="getUsersForStation" qname="operNS:getUsersForStation" returnQName="retNS:getUsersForStationReturn" returnType="rtns:User" soapAction="">
+        <parameter xmlns:pns="http://service.mdp.etf.unibl.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:stationId" type="tns:string"/>
+        <parameter xmlns:pns="http://service.mdp.etf.unibl.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="logout getActiveUsers login getUsersForStation"/>
+
+      <typeMapping xmlns:ns="http://model.mdp.etf.unibl.org" qname="ns:User" type="java:org.unibl.etf.mdp.model.User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
